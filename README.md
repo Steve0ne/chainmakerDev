@@ -86,23 +86,23 @@ apt install net-tools
 
 **Docker安装请参考tools目录下的进阶使用指南.pdf**
 
-## 简单部署-chainmaker-go
+## 简单部署-chainmakerGo
 
 - 编译证书生成工具：
 
 ``` shell
-cd chainmaker-cryptogen
+cd chainmakerCryptogen
 ```
 
 ``` shell
 make
 ```
 
-- 将编译好的chainmaker-cryptogen，软连接到chainmaker-go/tools目录：
+- 将编译好的chainmakerCryptogen，软连接到chainmakerGo/tools目录：
 
 ``` shell
-cd ../chainmaker-go/tools
-ln -s ../../chainmaker-cryptogen/ .
+cd ../chainmakerGo/tools
+ln -s ../../chainmakerCryptogen/ .
 ```
 
 - 生成节点可执行文件:
@@ -142,7 +142,7 @@ netstat -lptn | grep 123
 - 修改docker-compose.yml文件的版本参数：
 
 ``` shell
-cd management-backend
+cd managementBackend
 sudo nano docker-compose.yml
 ```
 
