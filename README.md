@@ -2,10 +2,10 @@
 
 | 项目                   | 版本    | 功能概括                                                                                                 |
 | :------------------- | :---- | :--------------------------------------------------------------------------------------------------- |
-| chainmakerGo        | 2.1.0 | 1. 可以通过内置的脚本与配置文件来生成长安链节点的执行文件。<br>2. 可以通过内置的**cmc命令行工具**在终端输入命令的方式对长安链的节点进行管理（功能丰富，但参数复杂）           |
-| chainmakerCryptogen | 2.1.0 | 生成各类证书（公钥）及签名，从而辅助chainmaker-go完成节点执行文件的生成。                                                          |
-| managementBackend   | 2.1.0 | 1. 可以通过图形化的前端页面来生成长安链节点的执行文件。<br>2. 可以通过图形化的前端页面对长安链的节点进行管理（功能较少，但操作简单）<br>3. 可以较为方便的查看链上的交易信息（主要用户） |
-| chainmakerShard     | 2.1.0 | 完成分片事务                                                                                               |
+| chainmaker-go        | 2.1.0 | 1. 可以通过内置的脚本与配置文件来生成长安链节点的执行文件。<br>2. 可以通过内置的**cmc命令行工具**在终端输入命令的方式对长安链的节点进行管理（功能丰富，但参数复杂）           |
+| chainmaker-cryptogen | 2.1.0 | 生成各类证书（公钥）及签名，从而辅助chainmaker-go完成节点执行文件的生成。                                                          |
+| management-backend   | 2.1.0 | 1. 可以通过图形化的前端页面来生成长安链节点的执行文件。<br>2. 可以通过图形化的前端页面对长安链的节点进行管理（功能较少，但操作简单）<br>3. 可以较为方便的查看链上的交易信息（主要用户） |
+| chainmaker-shard     | 2.1.0 | 完成分片事务                                                                                               |
 
 ## 身份权限管理模型
 
@@ -86,23 +86,23 @@ apt install net-tools
 
 **Docker安装请参考tools目录下的进阶使用指南.pdf**
 
-## 简单部署-chainmakerGo
+## 简单部署-chainmaker-go
 
 - 编译证书生成工具：
 
 ``` shell
-cd chainmakerCryptogen
+cd chainmaker-cryptogen
 ```
 
 ``` shell
 make
 ```
 
-- 将编译好的chainmakerCryptogen，软连接到chainmakerGo/tools目录：
+- 将编译好的chainmaker-cryptogen，软连接到chainmaker-go/tools目录：
 
 ``` shell
-cd ../chainmakerGo/tools
-ln -s ../../chainmakerCryptogen/ .
+cd ../chainmaker-go/tools
+ln -s ../../chainmaker-cryptogen/ .
 ```
 
 - 生成节点可执行文件:
