@@ -57,6 +57,35 @@
 | tree           | -        |
 | net-tools      | -        |
 
+
+### 命令
+
+``` shell
+sudo apt install git
+```
+
+``` shell
+sudo apt install gcc
+```
+
+``` shell
+sudo snap install go --channel=1.16/stable --classic
+```
+
+``` shell
+sudo apt install make
+```
+
+``` shell
+sudo apt install tree
+```
+
+``` shell
+apt install net-tools
+```
+
+**Docker安装请参考tools目录下的进阶使用指南.pdf**
+
 ## 简单部署-chainmaker-go
 
 - 编译证书生成工具：
