@@ -1,0 +1,108 @@
+# 监听器配置，包括WebListener和ChannelListener
+listener:
+  # WebListener配置，用于监听跨链SDK发送的跨链请求
+  web:
+    address: 127.0.0.1    # Web服务监听网卡地址
+    port: 8080            # Web服务监听端口
+    open_tx_router: true     #web服务开启事务处理路由
+    enable_tls: false
+    security:
+      enable_cert_auth: false   #启用证书验证, 验证对端证书
+      ca_file: { CA_FILE_PATH } #多个文件","分割，enable_cert_auth开启，ca证书用于验证客户端身份
+      cert_file: { TLS_CRT_PATH }    #tls证书文件
+      key_file: { TLS_KEY_PATH }  #tls私钥文件
+
+  # ChannelListener配置，用于监听其他跨链代理发送的事务请求
+  channel:
+    provider: libp2p                        # Channel监听方式，libp2p表示采用libp2p协议
+    libp2p:
+      address: /ip4/0.0.0.0/tcp/19527       # Channel监听的地址
+      priv_key_file: config/ecprikey.key    # Channel监听服务对应的私钥信息
+      protocol_id: /listener                # Channel监听协议ID
+      delimit: "\n"                         # Channel监听消息的处理分割符，通过该分割符对消息进行区分
+
+# 适配器配置，用于配置访问具体类的适配器信息
+adapters:
+  - provider: { CHAIN_TYPE_1 }                                  # 表示该链的类型，后面配置信息将是访问该链的配置信息
+    chain_id: { CHAIN_ID_1 }                                  # 该链的唯一ID标识
+    config_path: { ADAPTER_CONFIG_PATH_1 } # 该链对应Adapter的配置路径
+    proof_contract:                                     #配置存证合约
+      name: { TRANSACTION_CONTRACT_1 }                 #合约名
+      method: { SAVE_PROOF_METHOD_1 }                  #合约方法
+    extra_conf:
+  - provider: { CHAIN_TYPE_2 }                                   # 表示该链的类型，后面配置信息将是访问该链的配置信息
+    chain_id: { CHAIN_ID_2 }                                     # 该链的唯一ID标识
+    config_path: { ADAPTER_CONFIG_PATH_2 } # 该链对应Adapter的配置路径
+    proof_contract:
+      name: { TRANSACTION_CONTRACT_2 }
+      method: { SAVE_PROOF_METHOD_2 }
+    extra_conf:
+      org_user: # fabric 网络中指定的用户
+        - User1
+        org_peer: # fabric 网络中指定的节点
+          - peer0.org1.example.com
+          - peer0.org2.example.com
+
+# 路由集配置，用于配置其他跨链代理客户端的访问信息
+routers:
+  - provider: libp2p                          # 远端跨链代理1的网络访问方式
+    libp2p:                                   # 远端跨链代理1网络的具体信息
+      address: /ip4/IP/tcp/{ PORT }/{ PEER_ID }       # 远端跨链代理1基于libp2p访问下的地址
+      protocol_id: /listener                  # P2p网络协议号
+      delimit: "\n"                           # 发送到该跨链代理的消息处理分割符，通过该分割符对消息进行区分, #FBI WARNING# 必须是双引号的字符
+      reconnect_limit: 1000                   # router 连接断开重试次数
+      reconnect_interval: 5000                # 连接间隔，单位毫秒
+    chain_ids:                                # 远端跨链代理可直接操作的链集合，该集合为远端跨链代理adapters配置中支持的链列表
+      - chain2
+      - chain3
+  - provider: http
+    http:
+      address: http://{ IP }:{ PORT }
+      request_timeout: 40000  #请求超时时间(ms)
+      request_max_retries: 1000 #请求失败重试次数
+      request_retry_interval: 2000 #请求失败重试间隔时间(ms)
+      max_connection: 10000  #活跃的最大连接数
+      idle_conn_timeout: 120  #空闲连接超时时间
+      enable_tls: false
+      security:
+        enable_cert_auth: false   #启用证书验证, 验证对端证书
+        ca_file: { CA_FILE_PATH } #多个文件","分割，enable_cert_auth开启，ca证书用于验证服务器身份
+        cert_file: { TLS_CRT_PATH }    #tls证书文件
+        key_file: { TLS_KEY_PATH }  #tls私钥文件
+    chain_ids: # 远端跨链代理可直接操作的链集合，该集合为远端跨链代理adapters配置中支持的链列表
+      - chain1
+      - chain2
+
+# 证明集配置，用于配置当前跨链代理可访问的支持证明节点的信息
+provers:
+  - provider: spv     # 可提供证明的类型
+    config_path: config/spv.yml    # 该链对应的spv节点的配置路径
+    chain_ids:        # 该证明类型下支持的链列表
+     - { CHAIN_ID_1 }
+     - { CHAIN_ID_2 }
+
+# 存储配置，用于配置当前跨链代理对所有跨链请求的处理存储记录
+storage:
+  provider: leveldb                 # 当前存储采用的类型
+  leveldb:                          # 存储采用leveldb的情况下，对应leveldb的详细配置
+    store_path: storage/statedb     # leveldb的存储路径
+    write_buffer_size: 4            # leveldb的写入Buffer大小，单位：M
+    bloom_filter_bits: 10           # leveldb的布隆过滤器的bit长度
+
+# 日志配置，用于配置日志的打印
+log:
+  - module: default                 # 模块名称
+    log_level: INFO                 # 日志打印级别
+    file_path: logs/default.log     # 日志文件路径
+    max_age: 365                    # 日志最长保存时间，单位：天
+    rotation_time: 1                # 日志滚动时间，单位：小时
+    log_in_console: false           # 是否展示日志到终端，仅限于调试使用
+    show_color: true                # 是否打印颜色日志
+
+  - module: server                  # 模块名称
+    log_level: INFO                 # 日志打印级别
+    file_path: logs/server.log      # 日志文件路径
+    max_age: 365                    # 日志最长保存时间，单位：天
+    rotation_time: 1                # 日志滚动时间，单位：小时
+    log_in_console: false           # 是否展示日志到终端，仅限于调试使用
+    show_color: true                # 是否打印颜色日志

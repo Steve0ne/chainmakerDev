@@ -1,0 +1,41 @@
+cross_tx_params:
+  - chain_id: "chain1"
+    provider: "chainmaker"
+    contract_name: "BalanceStable"
+    execute_method: "Minus"
+    execute_params:
+      number: "1"
+    rollback_method: "Reset"
+    rollback_params:
+    index: 0
+    chain_type: chainmaker
+  - chain_id: "chain2"
+    provider: "chainmaker"
+    contract_name: "BalanceStable"
+    execute_method: "Plus"
+    execute_params:
+      number: "1"
+    rollback_method: "Reset"
+    rollback_params:
+    index: 1
+    chain_type: chainmaker
+#cross_tx_params:
+#  - chain_id: "chain1"
+#    contract_name: "BalanceStable"
+#    execute_method: "Plus"
+#    execute_params:
+#      number: "1"
+#    rollback_method: "Reset"
+#    rollback_params:
+#    index: 0
+#    chain_type: chainmaker
+#  - chain_id: "mychannel"
+#    contract_name: "fabcar"
+#    execute_method: "ChangeCarOwner"
+#    execute_params:
+#      0: "CAR0"
+#      1: "OWNER99"
+#    rollback_method: "QueryAllCars"
+#    rollback_params:
+#    index: 1
+#    chain_type: fabric

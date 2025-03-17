@@ -1,0 +1,41 @@
+/*
+ Copyright (C) THL A29 Limited, a Tencent company. All rights reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+syntax            = "proto3";
+option go_package = "module/pb/protogo/event";
+package event;
+import "module/pb/proto/event/event.proto";
+
+message ProofResponse {
+    string cross_id        = 1;
+    OpFuncType op_func     = 2;
+    int32 code             = 3;
+    string msg             = 4;
+    string key             = 5;
+    TxResponse tx_response = 6;
+}
+
+message TxResponse {
+    string chain_id       = 1;
+    string tx_key         = 2;
+    int64 block_height    = 3;
+    int32 index           = 4;
+    ContractInfo contract = 5;
+    bytes extra           = 6;
+}
+
+message CrossResponse {
+    string cross_id                       = 1;
+    int32 code                            = 2;
+    string msg                            = 3;
+    repeated CrossTxResponse tx_responses = 4;
+}
+
+message CrossTxResponse {
+    string chain_id    = 1;
+    string tx_key      = 2;
+    int64 block_height = 3;
+    int32 index        = 4;
+    bytes extra        = 5;
+}

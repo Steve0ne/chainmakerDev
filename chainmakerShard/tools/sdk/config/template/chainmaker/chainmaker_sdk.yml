@@ -1,0 +1,25 @@
+chain_client:
+  # 链ID
+  chain_id: CHAIN_ID
+  # 组织ID
+  org_id: ORG_ID
+  # 客户端用户私钥路径，使用绝对路径
+  user_key_file_path: USER_KEY_PATH
+  # 客户端用户证书路径，使用绝对路径
+  user_crt_file_path: USER_KEY_PATH
+  # 客户端用户交易签名私钥路径(若未设置，将使用user_key_file_path)，使用绝对路径
+  user_sign_key_file_path: SIGN_KEY_PATH
+  # 客户端用户交易签名证书路径(若未设置，将使用user_crt_file_path)，使用绝对路径
+  user_sign_crt_file_path: SIGN_CRT_PATH
+
+  nodes:
+    - # 节点地址，格式为：IP:端口:连接数
+      node_addr: IP:PORT
+      # 节点连接数
+      conn_cnt: 5
+      # RPC连接是否启用双向TLS认证
+      enable_tls: false
+      # 信任证书池路径，使用绝对路径
+      trust_root_paths:
+      # TLS hostname
+      tls_host_name: TLS_HOST_NAME

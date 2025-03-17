@@ -1,0 +1,65 @@
+pkcs11_keys:
+  - wx-org1.chainmaker.org:
+      ca:
+        - SM2SignKey1
+      node:
+        consensus:
+          - SM2SignKey2
+          - SM2SignKey3
+        common:
+          - SM2SignKey3
+      user:
+        admin:
+          - SM2SignKey4
+        client:
+          - SM2SignKey5
+        light:
+          - SM2SignKey6
+  - wx-org2.chainmaker.org:
+      ca:
+        - SM2SignKey7
+      node:
+        consensus:
+          - SM2SignKey8
+          - SM2SignKey9
+        common:
+          - SM2SignKey9
+      user:
+        admin:
+          - SM2SignKey10
+        client:
+          - SM2SignKey11
+        light:
+          - SM2SignKey12
+  - wx-org3.chainmaker.org:
+      ca:
+        - SM2SignKey13
+      node:
+        consensus:
+          - SM2SignKey14
+          - SM2SignKey15
+        common:
+          - SM2SignKey15
+      user:
+        admin:
+          - SM2SignKey16
+        client:
+          - SM2SignKey17
+        light:
+          - SM2SignKey18
+  - wx-org4.chainmaker.org:
+      ca:
+        - SM2SignKey19
+      node:
+        consensus:
+          - SM2SignKey20
+          - SM2SignKey21
+        common:
+          - SM2SignKey21
+      user:
+        admin:
+          - SM2SignKey22
+        client:
+          - SM2SignKey23
+        light:
+          - SM2SignKey24

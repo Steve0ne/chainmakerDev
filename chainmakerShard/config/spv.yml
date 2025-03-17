@@ -1,0 +1,101 @@
+#
+#  Copyright (C) THL A29 Limited, a Tencent company. All rights reserved.
+#
+#  SPDX-License-Identifier: Apache-2.0
+#
+
+# 链配置
+chains:
+   # 类型，当前仅支持（ChainMaker_Light，ChainMaker_SPV，Fabric_SPV）三种类型
+ - chain_type: { SPV_TYPE_1 }
+   # 链ID
+   chain_id: { CHAIN_ID_1 }
+   # 同步链中节点区块最新高度信息的时间间隔，单位：毫秒
+   sync_interval: 10000
+   # 并发请求区块的数量
+   concurrent_nums: 100
+   # sdk配置文件路径
+   sdk_config_path: { ADAPTER_CONFIG_PATH_1 }
+
+  # 类型，当前仅支持（ChainMaker_Light，ChainMaker_SPV，Fabric_SPV）三种类型
+ - chain_type: { SPV_TYPE_2 }
+   # 链ID
+   chain_id: { CHAIN_ID_2 }
+   # 同步链中节点区块最新高度信息的时间间隔，单位：毫秒
+   sync_interval: 10000
+   # 并发请求区块的数量
+   concurrent_nums: 100
+   # sdk配置文件路径
+   sdk_config_path: { ADAPTER_CONFIG_PATH_2 }
+   # fabric特有的配置项，其他类型的链不需要配置
+   fabric_extra_config:
+     # 节点列表
+     peers:
+       - peer: "peer0.org1.example.com"
+       - peer: "peer1.org1.example.com"
+
+# grpc配置
+grpc:
+  # grpc监听网卡地址
+  address: 127.0.0.1
+  # grpc监听端口
+  port: 12345
+  # 是否开启tls验证
+  enable_tls: false
+  security:
+    # 是否开启CA验证
+    ca_auth: false
+    # ca文件
+    ca_file:
+      { CA_FILE_PATH }
+    # tls证书文件
+    cert_file: { TLS_CRT_PATH }
+    # tls私钥文件
+    key_file: { TLS_KEY_PATH }
+
+# web配置
+web:
+  # web服务监听网卡地址，http或https由${enable_tls}参数判断，无需配置
+  address: 127.0.0.1
+  # web监听端口
+  port: 12346
+  # 是否开启tls验证
+  enable_tls: false
+  security:
+    # 是否开启CA验证
+    ca_auth: false
+    # ca文件
+    ca_file:
+      - { CA_FILE_PATH }
+    # tls证书文件
+    cert_file: { TLS_CRT_PATH }
+    # tls私钥文件
+    key_file: { TLS_KEY_PATH }
+
+# 存储配置
+storage:
+  # 存储类型，当前仅支持leveldb类型
+  provider: "leveldb"
+  # leveldb的详细配置
+  leveldb:
+    # leveldb的存储路径
+    store_path: "../data/spv_db"
+    # leveldb写入Buffer大小，单位：MB
+    write_buffer_size: 32
+    # leveldb布隆过滤器的bit长度
+    bloom_filter_bits: 10
+
+# 日志配置，用于配置日志的打印
+log:
+  # 日志打印级别
+  log_level: "INFO"
+  # 日志文件路径
+  file_path: "../log/spv.log"
+  # 日志最长保存时间，单位：天
+  max_age: 365
+  # 日志滚动时间，单位：小时
+  rotation_time: 1
+  # 是否展示日志到终端，仅限于调试使用
+  log_in_console: false
+  # 是否打印颜色日志
+  show_color: true

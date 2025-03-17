@@ -1,0 +1,30 @@
+configs:
+  - chain_id: { CM_CHAIN_ID }
+    chain_type: "chainmaker"
+    org_id: { CM_ORG_ID }
+    sign_key_path: { CM_SIGN_KEY_PATH }
+    sign_crt_path: { CM_SIGN_CRT_PATH }
+    extra_params:
+
+  - chain_id: { CM_CHAIN_ID }
+    chain_type: "chainmaker"
+    org_id: { CM_ORG_ID }
+    sign_key_path: { CM_SIGN_KEY_PATH }
+    sign_crt_path: { CM_SIGN_CRT_PATH }
+    extra_params:
+
+  - chain_id: { FABRIC_CHAIN_ID }
+    chain_type: "fabric"
+    org_id: { FABRIC_ORG_ID }
+    sign_key_path: { FABRIC_SIGN_KEY_PATH }
+    sign_crt_path: { FABRIC_SIGN_CRT_PATH }
+    extra_params:
+
+http:
+  enable_tls: false
+  security:
+    ca_file: { CA_PATH }    #ca文件，多个可用","分割
+    cert_file: { CRT_PATH } #tls证书文件
+    key_file: { KEY_PATH }  #tls私钥文件
+    enable_cert_auth: true  #启用证书验证
+

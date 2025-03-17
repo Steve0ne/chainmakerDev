@@ -1,0 +1,73 @@
+/*
+ Copyright (C) THL A29 Limited, a Tencent company. All rights reserved.
+ SPDX-License-Identifier: Apache-2.0
+*/
+syntax            = "proto3";
+option go_package = "module/pb/protogo/event";
+package event;
+
+enum OpFuncType {
+    ExecuteOpFunc  = 0;
+    CommitOpFunc   = 1;
+    RollbackOpFunc = -1;
+}
+
+// CrossEvent represents a cross-chain event
+message CrossEvent {
+    string cross_id    = 1;
+    CrossTxs tx_events = 2;
+    string version     = 3;
+    int64 timestamp    = 4;
+    bytes extra        = 5;
+}
+// CrossTxs a set of cross-chain transaction
+message CrossTxs {
+    repeated CrossTx events = 1;
+}
+// CrossTx represents a cross-chain transaction
+message CrossTx {
+    string chain_id        = 1;
+    int32 index            = 2;
+    string proof_key       = 3;
+    bytes execute_payload  = 4;
+    bytes commit_payload   = 5;
+    bytes rollback_payload = 6;
+}
+// CrossSearchEvent represents a cross-chain search event
+message CrossSearchEvent {
+    string cross_id = 1;
+}
+
+// TransactionEvent represents a cross-chain transaction event
+message TransactionEvent {
+    string cross_id    = 1;
+    OpFuncType op_func = 2;
+    string chain_id    = 3;
+    bytes payload      = 4;
+    string proof_key   = 5;
+    Proof tx_proof     = 6;
+}
+// Proof represents proof of a transaction
+message Proof {
+    string chain_id       = 1;
+    string tx_key         = 2;
+    int64 block_height    = 3;
+    int32 index           = 4;
+    ContractInfo contract = 5;
+    bytes extra           = 6;
+}
+
+// ContractInfo is the information of contract
+message ContractInfo {
+    string name                           = 1;
+    string version                        = 2;
+    string method                         = 3;
+    repeated ContractParameter parameters = 4;
+    bytes extra_data                      = 5;
+}
+
+// ContractParameter is a parameter of the calling contract
+message ContractParameter {
+    string key   = 1;
+    string value = 2;
+}
