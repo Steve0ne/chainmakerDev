@@ -88,6 +88,15 @@ apt install net-tools
 
 ## 简单部署-chainmaker-go
 
+
+- 下载chainmaker-go的源码：
+
+``` shell
+git clone -b v2.1.0 https://git.chainmaker.org.cn/chainmaker/chainmaker-go.git
+```
+由于该仓库是私有仓库，可以输入前面注册的账号信息，完成身份鉴定。
+
+
 - 编译证书生成工具：
 
 ``` shell
